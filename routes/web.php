@@ -15,12 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome')->name('Home');
+   return redirect('home');
 });
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
 
 Route::middleware([
     'auth:sanctum',
@@ -32,5 +30,5 @@ Route::middleware([
     })->name('dashboard');
 });
 
- 
-Route::resource('plats',PlatController::class);
+
+Route::resource('home',PlatController::class);

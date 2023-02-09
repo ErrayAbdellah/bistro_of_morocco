@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="{{route('plats.store')}}" method="post" enctype="multipart/form-data">
+    <form action="{{route('home.store')}}" method="post" enctype="multipart/form-data">
         @csrf
         {{-- @method('POST') --}}
         <input type="text" name="title" id="" placeholder="">

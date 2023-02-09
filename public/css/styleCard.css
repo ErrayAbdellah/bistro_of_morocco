@@ -101,44 +101,13 @@ body {
   z-index: -1;
 }
 
-/* .inside-page__btn--city { 
-  border-color: #c50000;
-  color: #c50000;
-}
-
-.inside-page__btn--city::before { 
-  background-color: #c50000;
-}
-
-.inside-page__btn--ski { 
-  border-color: #279eb2;
-  color: #279eb2;
-}
-
-.inside-page__btn--ski::before { 
-  background-color: #279eb2;
-}
-
-.inside-page__btn--beach { 
-  border-color: #fa7f67;
-  color: #fa7f67;
-}
-
-.inside-page__btn--beach::before { 
-  background-color: #fa7f67;
-}
-
-.inside-page__btn--camping { 
-  border-color: #00b97d;
-  color: #00b97d;
-} */
 
 .inside-page__btn--camping::before { 
   background-color: #00b97d;
 }
 
 .inside-page__btn:hover { 
-  color: #fafbfa;
+  color: #1191d1;
 }
 
 .inside-page__btn:hover::before { 

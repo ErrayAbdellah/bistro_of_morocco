@@ -15,7 +15,7 @@ class PlatController extends Controller
     public function index()
     {
         $plats = Plat::all();
-        return  view('plat',['plats'=> $plats]);
+        return  view('home',['plats'=> $plats]);
     }
  
     /**
@@ -25,7 +25,7 @@ class PlatController extends Controller
      */
     public function create()
     {
-        $plats = Plat::all();
+        // $plats = Plat::all();
         return view('addplat');
     }
 
