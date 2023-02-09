@@ -3,11 +3,13 @@
 @section('content')
 <div>
     @auth
-    <div class="d-flex justify-content-end mt-3">
-        <a href="{{route('home.create')}}" class="btn btn-primary" > add plat</a>
-    </div>
+    @if(Auth::user()->role)
+        <div class="d-flex justify-content-end mt-3">
+            <a href="{{route('home.create')}}" class="btn btn-primary" > add plat</a>
+        </div>
+    @endif
     @endauth
-    <main class="d-flex justify-content-around flex-wrap bg-black ms-5 " style="width: 62%">
+    <main class="d-flex justify-content-around flex-wrap ms-5 " style="width: 62%">
     @foreach ($plats as $plat)
     <section class="card-area mt-5 pt-5">
         <section class="card-section">
@@ -41,16 +43,16 @@
                     <p class="inside-page__text">
                         {{$plat->description}}
                     </p>
-                    <div class="inside-page__btn inside-page__btn--city">{{$plat->price."MAD"}}</div>
-                </div>
-                @auth
+                    <div class="inside-page__btn inside-page__btn--city ">{{$plat->price."MAD"}}</div>
+                    @auth
                     @if(Auth::user()->role)
-                        <div class="mb-5">
-                            <a href="" class="btn btn-info class="mb-5">Update</a>
-                            <a href="" class="btn btn-danger class="mb-5">Delete</a>
-                        </div>
+                    <div class="mt-1">
+                        <a href='{{ route("home.edit", $plat->id) }}' class="btn btn-info class="mb-5">Update</a>
+                        <a href="" class="btn btn-danger class="mb-5">Delete</a>
+                    </div>
                     @endif
-                @endauth
+                    @endauth
+                </div>
             </div>
         </div>
     </section>

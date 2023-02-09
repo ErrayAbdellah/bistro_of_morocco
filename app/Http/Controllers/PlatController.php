@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Plat;
+// use Facade\FlareClient\Stacktrace\File\delete;
+use Facade\FlareClient\Stacktrace\File;
 use Illuminate\Http\Request;
 
 class PlatController extends Controller
@@ -70,6 +72,8 @@ class PlatController extends Controller
     public function edit($id)
     {
         //
+        $plats = Plat::find($id);
+        return view('update',['plats'=>$plats]);
     }
 
     /**
@@ -82,6 +86,31 @@ class PlatController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $plat = Plat::find($id);
+        
+        $validate = $request->validate([
+            'title'=> 'required',
+            'description'=> 'required',
+            'price'=> 'required'
+            //'image'=>'required|image'
+        ]);
+
+        // dd('here die') ;
+        $plat->title = $validate['title'];
+        $plat->description = $validate['description'];
+        $plat->price = $validate['price'];
+        
+        // if($image = $request->file('image')){
+        //     $image_path = 'images/';
+        //     $img_name = date('YmdHis').".".$image->getClientOriginalExtension();
+        //     $image->move($image_path,$img_name);
+        //     $plat->image = $img_name;
+        // }else{
+        //     unset($plat['image']);
+        // } ;
+        // File::delete('images/post/'.$plat->image);
+        $plat->update();
+        return redirect()->back()->with("see");
     }
 
     /**

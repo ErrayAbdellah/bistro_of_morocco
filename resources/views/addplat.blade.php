@@ -12,7 +12,7 @@
         {{-- @method('POST') --}}
         <input type="text" name="title" id="" placeholder="">
         <input type="text" name="description" id="" placeholder="">
-        <input type="text" name="price" id="" placeholder="">
+        <input type="number" name="price" id="" placeholder="">
         <input type="file" name="image">
         <input type="submit">
         
