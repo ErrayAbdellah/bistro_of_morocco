@@ -1,19 +1,8 @@
 
-/* CSS reset */
-*,
-*::after,
-*::before {
-  box-sizing: inherit;
-  margin: 0;
-  padding: 0;
-}
-
-
-
 body {
   box-sizing: border-box;
   font-family: 'Open Sans', sans-serif;
-  position: relative;
+  /* position: relative; */
 }
 
 /* Typography =======================*/

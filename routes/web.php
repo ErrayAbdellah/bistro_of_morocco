@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PlatController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,3 +33,10 @@ Route::middleware([
 
 
 Route::resource('home',PlatController::class);
+
+Route::get('/users',[UserController::class,'index']);
+
+
+// Route::get('/home/create',function(){
+//     return redirect('/home/create');
+// })->middleware('admin')->name('add');

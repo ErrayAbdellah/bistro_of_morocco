@@ -15,9 +15,16 @@
                     <x-jet-nav-link href="{{ route('home.index') }}" :active="request()->routeIs('home.index')">
                         {{ __('Home') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-jet-nav-link>
+                    @auth
+                        @if(Auth::user()->role)
+                            <x-jet-nav-link href="{{ route('users') }}" :active="request()->routeIs('users')">
+                                {{ __('Users') }}
+                            </x-jet-nav-link>
+                            @endif
+                            <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                                {{ __('Dashboard') }}
+                            </x-jet-nav-link>
+                        @endauth
                 </div>
                 @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">

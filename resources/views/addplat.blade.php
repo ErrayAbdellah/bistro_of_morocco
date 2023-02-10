@@ -1,28 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <form action="{{route('home.store')}}" method="post" enctype="multipart/form-data">
+
+@extends('dashboard')
+@section('content')
+
+    <form action="{{route('home.store')}}" method="post" enctype="multipart/form-data" class="w-50 text-center">
         @csrf
-        {{-- @method('POST') --}}
-        <input type="text" name="title" id="" placeholder="">
-        <input type="text" name="description" id="" placeholder="">
-        <input type="number" name="price" id="" placeholder="">
-        <input type="file" name="image">
-        <input type="submit">
+        
+        <div class="form-group">
+            <input class="form-control" type="text" name="title" id="" placeholder="" >
+            <span class="text-danger fw-bold">@error('title'){{$message}}
+            @enderror</span>
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name="description" id="" placeholder="" >
+            <span class="text-danger fw-bold">@error('description'){{$message}}
+                @enderror</span>
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="number" name="price" id="" placeholder=""  >
+            <span class="text-danger fw-bold">@error('price'){{$message}}
+                @enderror</span>
+        </div>
+        <div class="form-group">
+            <input type="file" name="image" class="form-control" >
+        </div>
+        <x-jet-button wire:click="confirmLogout" wire:loading.attr="disabled">
+            {{ __('Submit') }}
+        </x-jet-button>
         
     </form>
-{{-- @dd($plats) --}}
-    {{-- @foreach ($plats as $plat) 
-        <div>
-             <h1>{{$plat->title}}</h1> 
-            <img src="/images/{{$plat->image}}" alt="">
-        </div>
-    @endforeach --}}
-</body>
-</html>
+    
+    @endsection
+

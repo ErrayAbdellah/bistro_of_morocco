@@ -29,8 +29,8 @@
                             </p>
                         </div>
                     </div>
-                    <div class="card-back "  style=" height:100%">
-                        <img src="/images/{{$plat->image}}" height="100%" alt="">
+                    <div class="card-back " >
+                        <img src="/images/{{$plat->image}}" alt="" class=" mt-5">
                     </div>
                 </div>
             </div>
@@ -46,9 +46,13 @@
                     <div class="inside-page__btn inside-page__btn--city ">{{$plat->price."MAD"}}</div>
                     @auth
                     @if(Auth::user()->role)
-                    <div class="mt-1">
+                    <div class="mt-1 d-flex">
                         <a href='{{ route("home.edit", $plat->id) }}' class="btn btn-info class="mb-5">Update</a>
-                        <a href="" class="btn btn-danger class="mb-5">Delete</a>
+                        <form action="{{ route("home.destroy",$plat->id) }}" method="post">
+                            @csrf
+                            @method("DELETE")
+                            <input type="submit" class="btn btn-danger class="mb-5" value="Delete" style="background-color: brown">
+                        </form>
                     </div>
                     @endif
                     @endauth

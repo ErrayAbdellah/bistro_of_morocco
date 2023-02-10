@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Plat;
 // use Facade\FlareClient\Stacktrace\File\delete;
-use Facade\FlareClient\Stacktrace\File;
+// use Facade\FlareClient\Stacktrace\File;
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PlatController extends Controller
 {
@@ -27,8 +29,11 @@ class PlatController extends Controller
      */
     public function create()
     {
-        // $plats = Plat::all();
-        return view('addplat');
+        if(Auth::user()->role){
+            return view('addplat');
+        }else{
+            return redirect('/home');
+        }
     }
 
     /**
@@ -39,17 +44,18 @@ class PlatController extends Controller
      */
     public function store(Request $request)
     {
-        $plat = $request->all();
-
-        if($image = $request->file('image')){
-            $image_path = 'images/';
-            $img_name = date('YmdHis').".".$image->getClientOriginalExtension();
-            $image->move($image_path,$img_name);
-            $plat['image']=$img_name;
-        }
-
-        Plat::create($plat);
-        return redirect()->back()->with("see");
+        
+            $plat = $request->all();
+            
+            if($image = $request->file('image')){
+                $image_path = 'images/';
+                $img_name = date('YmdHis').".".$image->getClientOriginalExtension();
+                $image->move($image_path,$img_name);
+                $plat['image']=$img_name;
+            }
+            
+            Plat::create($plat);
+            return redirect()->back()->with("see");
     }
 
     /**
@@ -61,6 +67,7 @@ class PlatController extends Controller
     public function show($id)
     {
         //
+        echo "SHOW";
     }
 
     /**
@@ -71,9 +78,12 @@ class PlatController extends Controller
      */
     public function edit($id)
     {
-        //
-        $plats = Plat::find($id);
-        return view('update',['plats'=>$plats]);
+        if(Auth::user()->role){
+            $plats = Plat::find($id);
+            return view('update',['plats'=>$plats]);
+        }else{
+            return redirect('/home');
+        }
     }
 
     /**
@@ -87,28 +97,31 @@ class PlatController extends Controller
     {
         //
         $plat = Plat::find($id);
-        
+        if(File::exists($plat)){
+           
+        }
         $validate = $request->validate([
             'title'=> 'required',
             'description'=> 'required',
-            'price'=> 'required'
-            //'image'=>'required|image'
+            'price'=> 'required',
+            'image'=>'required|image'
         ]);
 
-        // dd('here die') ;
+        $deletImage = $plat->image;
         $plat->title = $validate['title'];
         $plat->description = $validate['description'];
         $plat->price = $validate['price'];
         
-        // if($image = $request->file('image')){
-        //     $image_path = 'images/';
-        //     $img_name = date('YmdHis').".".$image->getClientOriginalExtension();
-        //     $image->move($image_path,$img_name);
-        //     $plat->image = $img_name;
-        // }else{
-        //     unset($plat['image']);
-        // } ;
-        // File::delete('images/post/'.$plat->image);
+        if($image = $request->file('image')){
+            
+            $image_path = 'images/';
+            $img_name = date('YmdHis').".".$image->getClientOriginalExtension();
+            $image->move($image_path,$img_name);
+            $plat->image = $img_name;
+            File::delete(public_path("images/$deletImage"));
+        }else{
+            unset($plat['image']);
+        } ;
         $plat->update();
         return redirect()->back()->with("see");
     }
@@ -121,6 +134,15 @@ class PlatController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(Auth::user()->role){
+            
+            $plat = Plat::find($id);
+            File::delete(public_path("images/$plat->image"));
+            $plat->delete();
+    
+            return redirect('/home')->with('seccess','Plat remove');
+        }else{
+            return redirect('/home');
+        }
     }
 }
