@@ -9,9 +9,9 @@
         </div>
     @endif
     @endauth
-    <main class="d-flex justify-content-around flex-wrap ms-5 " style="width: 62%">
+    <main class="d-flex justify-content-around flex-wrap " style="width: 95%">
     @foreach ($plats as $plat)
-    <section class="card-area mt-5 pt-5">
+    <section class="card-area mt-5 pt-5 my-4">
         <section class="card-section">
             <div class="card">
                 <div class="flip-card">
@@ -51,7 +51,7 @@
                         <form action="{{ route("home.destroy",$plat->id) }}" method="post">
                             @csrf
                             @method("DELETE")
-                            <input type="submit" class="btn btn-danger class="mb-5" value="Delete" style="background-color: brown">
+                            <input type="submit" class="btn btn-danger "class="mb-5 ms-2" value="Delete" style="background-color: brown">
                         </form>
                     </div>
                     @endif

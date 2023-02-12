@@ -12,16 +12,16 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('home.index') }}" :active="request()->routeIs('home.index')">
+                    <x-jet-nav-link  class="text-decoration-none" href="{{ route('home.index') }}" :active="request()->routeIs('home.index')">
                         {{ __('Home') }}
                     </x-jet-nav-link>
                     @auth
                         @if(Auth::user()->role)
-                            <x-jet-nav-link href="{{ route('users') }}" :active="request()->routeIs('users')">
+                            <x-jet-nav-link   class="text-decoration-none" href="{{ route('users') }}" :active="request()->routeIs('users')">
                                 {{ __('Users') }}
                             </x-jet-nav-link>
                             @endif
-                            <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                            <x-jet-nav-link  class="text-decoration-none" href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                                 {{ __('Dashboard') }}
                             </x-jet-nav-link>
                         @endauth
