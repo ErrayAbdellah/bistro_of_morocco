@@ -9,7 +9,7 @@
         </div>
     @endif
     @endauth
-    <main class="d-flex justify-content-around flex-wrap " style="width: 95%">
+    <main class="d-flex justify-content-around flex-wrap " style="width: 90%">
     @foreach ($plats as $plat)
     <section class="card-area mt-5 pt-5 my-4">
         <section class="card-section">

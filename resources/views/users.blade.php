@@ -20,17 +20,19 @@
         
         
         @foreach($users as $user)
-        @if ($user->id != Auth::user()->id)  
-        <tr>
-          <th scope="row">{{ _($i++) }}</th>
-          <td>{{ $user->name }}</td>
-          <td>{{ $user->created_at }}</td>    
-                  @if (!$user->role)
-                    <td><a href="{{route('addAdmin',['id'=>$user->id])}}" class="btn btn-primary">Add Admin</a></td>  
-                  @endif
-                </tr>
-              @endif
-            @endforeach
+          @if ($user->id != Auth::user()->id)  
+          <tr>
+            <th scope="row">{{ $i++ }}</th>
+            <td>{{ $user->name }}</td>
+            <td>{{ $user->created_at }}</td>    
+            @if (!$user->role)
+              <td><a href="{{route('addAdmin',['id'=>$user->id])}}" class="btn btn-primary">Add Admin</a></td>                      
+              @else
+              <td><a href="{{route('addAdmin',['id'=>$user->id])}}" class="btn btn-primary">Add User</a></td>                    
+            @endif
+            </tr>
+          @endif
+        @endforeach
         </tbody>
       </table>
     </div>

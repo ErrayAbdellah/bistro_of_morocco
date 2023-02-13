@@ -97,9 +97,9 @@ class PlatController extends Controller
     {
         //
         $plat = Plat::find($id);
-        if(File::exists($plat)){
+        // if(File::exists($plat)){
            
-        }
+        // }
         $validate = $request->validate([
             'title'=> 'required',
             'description'=> 'required',

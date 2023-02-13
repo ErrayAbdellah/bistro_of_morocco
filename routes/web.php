@@ -34,8 +34,12 @@ Route::middleware([
 
 Route::resource('home',PlatController::class);
 
-Route::get('/users',[UserController::class,'index'])->name('users');
+Route::get('/users',[UserController::class,'index'])->name('users')->middleware('admin');
 Route::get('/add/{id}',[UserController::class,'add'])->name('addAdmin');
+Route::get('/welcome',[UserController::class,function(){
+    return view('welcome');
+}]);
+
 
 
 // Route::get('/home/create',function(){
